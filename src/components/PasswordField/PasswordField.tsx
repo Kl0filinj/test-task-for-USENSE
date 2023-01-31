@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import {
   ContentContainer,
   MainContainer,
@@ -11,8 +11,8 @@ import {
 const PasswordField = () => {
   const [password, setPassword] = useState('');
 
-  const checkStrenth = password => {
-    let strength = 0;
+  const checkStrenth = (password: string) => {
+    let strength: number = 0;
     if (password === '') {
       return strength;
     }
@@ -21,7 +21,7 @@ const PasswordField = () => {
       console.log(strength);
       return strength;
     }
-    if (password.match(/[A-Za-z]/)) {
+    if (password.match(/[A-Za-z]||[А-Яа-я]/)) {
       strength += 1;
     }
     if (password.match(/([0-9])/)) {
@@ -41,7 +41,9 @@ const PasswordField = () => {
           <PasswordInput
             type="text"
             value={password}
-            onChange={evt => setPassword(evt.currentTarget.value)}
+            onChange={(evt: React.ChangeEvent<HTMLInputElement>) =>
+              setPassword(evt.currentTarget.value)
+            }
           />
           <SectionsList>
             <PasswordStrengthSection

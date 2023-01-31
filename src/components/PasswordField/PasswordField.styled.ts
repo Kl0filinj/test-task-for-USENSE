@@ -1,6 +1,14 @@
 const { default: styled } = require('@emotion/styled');
 
-const strengthPresets = {
+interface IStrengthPresets {
+  [index: number]: string;
+}
+
+interface INthOptions {
+  [index: string]: string;
+}
+
+const strengthPresets: IStrengthPresets = {
   0: 'none',
   5: 'tooShort',
   1: 'easy',
@@ -8,7 +16,7 @@ const strengthPresets = {
   3: 'hard',
 };
 
-const nthOptions = {
+const nthOptions: INthOptions = {
   tooShort: '-n+3',
   easy: '-n+1',
   medium: '-n+2',
@@ -60,8 +68,8 @@ export const PasswordStrengthSection = styled.div`
   margin: 10px 3px;
   background-color: gray;
   transition: background-color 450ms cubic-bezier(0.4, 0, 0.2, 1);
-  &:nth-of-type(${({ strength }) => nthOptions[strengthPresets[strength]]}) {
-    background-color: ${({ strength }) => {
+  &:nth-of-type(${({ strength }: {strength: number}) => nthOptions[strengthPresets[strength]]}) {
+    background-color: ${({ strength }: {strength: number}) => {
       switch (strengthPresets[strength]) {
         case 'tooShort':
           return 'red';
